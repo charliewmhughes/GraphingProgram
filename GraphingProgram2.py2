@@ -11,11 +11,13 @@ def flip():
     pygame.display.flip()
     
 #basic math variables
-x = int(239)
-y = int(239)
-xbase = int(239)
+x = (1)
+xbase = int(219)
+ybase = int(300)
 loops = int(0)
 drawbuttonclicked = False
+xvalue = xbase
+yvalue = ybase
 
 #set image variables for import
 #unclicked buttons
@@ -37,15 +39,8 @@ running = True
 white = (255,  255,  255)
 black = (0,  0,  0)
 
-#colour the background
-background_colour = (white)
-screen.fill(background_colour)
-
 #give the display window a title
 pygame.display.set_caption('Graphing Program')
-
-#push the window to the GUI
-flip()
 
 #some button variables (bit late sorry)
 buttonyvariable = 30
@@ -68,36 +63,48 @@ screen.fill(background_colour)
 #bop it, twist it, flip it
 flip
 
-#coordinate variables
-raw = raw_input('y =')#at this point, y = the rule, or y = x for testing purposes
-y = raw
-print(raw)
+raw = raw_input('y =')
 
-gap = 17 #gap between points on the image
-xvalue = x #at this point xvalue = x = 239
-yvalue = (eval(y))#has been at this point y = raw input and yvalue = the evaluated form of raw input (the rule has been calculated)
-y = (eval(y))
-
-gradient = yvalue/x #using yvalue instead of y because we need it to be evaluated first, and i can't be bothered to change this yet
-
-
- #some intercepts
-pointlist = [ ] #this is the pointlist for the line(s)
-
-print('gradient:')
-print(gradient)
+pointlist = [] #point list for the variables
  
-##yvalue = 239
+def pointfulfill():
+    pointlist.append( (xvalue,  yvalue),  )
  
 while loops < 200: #repeat the rule thingamy
-    pointlist.append( (xvalue,  yvalue),  )#first time, sets to 239,239 then after that, it sets to whatever was set last time around
-    yvalue = y
-    xvalue = x
-    x = x+17
-    y = y-17
-    loops = loops+1#add to the loops variable to control how many times it loops.
+        
+    pointfulfill() #at the start, so the first point will be in the middle!
 
-print(pointlist)
+    y = eval(raw)
+    x = x
+    
+    if x > 0:
+        xvalue = 219 + 17 * x
+    elif x < 0:
+        xvalue = 219 - 17 * x
+    elif x == 0:
+        xvalue = 219
+    
+    if y > 0:
+        yvalue = 300 - 17 * y
+    elif x < 0:
+        yvalue = 300 + 17 * y
+    elif x == 0:
+        yvalue = 300
+    
+    print('y:')
+    print(y)
+    print('x:')
+    print(x)
+    
+    print('xvalue:')
+    print(xvalue)
+    print('yvalue:')
+    print(yvalue)
+    
+    x = x+1
+    
+    loops = loops+1
+
 def drawlines():
     #draw an antialiased line between two points
     pygame.draw.aalines(screen,  black,  False,  pointlist,  0)
@@ -107,7 +114,7 @@ def reset():
     background_colour = (white)
     screen.fill(background_colour)
     #place the cartesian pane
-    screen.blit(plane_image,  ((spacing), spacing))
+    screen.blit(plane_image,  (10, 60))
     #bop it, twist it, flip it
     flip()
     drawbuttonclicked = False
@@ -117,7 +124,7 @@ while running:
     mouse_position = pygame.mouse.get_pos()
     
     #place the cartesian pane
-    screen.blit(plane_image,  ((spacing), (spacing)))
+    screen.blit(plane_image,  (10, 60))
     
     #place buttons at the top
     #draw button

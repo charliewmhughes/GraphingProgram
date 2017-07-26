@@ -11,7 +11,7 @@ def flip():
     pygame.display.flip()
     
 #basic math variables
-x = (1)
+x = (0)
 xbase = int(219)
 ybase = int(300)
 loops = int(0)
@@ -29,6 +29,8 @@ draw_button_image_unclicked = pygame.image.load('draw_button_unclicked.png')
 exit_button_image_clicked = pygame.image.load('exit_button_clicked.png')
 clear_button_image_clicked = pygame.image.load('clear_button_clicked.png')
 draw_button_image_clicked = pygame.image.load('draw_button_clicked.png')
+#quit_message display (error etc.)
+quit_message = pygame.image.load('quit_message.png')
 
 #setup the display window
 (width, height) = (504, 550)
@@ -71,11 +73,21 @@ def pointfulfill():
     pointlist.append( (xvalue,  yvalue),  )
  
 while loops < 200: #repeat the rule thingamy
-        
-    pointfulfill() #at the start, so the first point will be in the middle!
 
     y = eval(raw)
     x = x
+    
+    if loops < 2:
+        if y > 10:
+            print('the rule created a value that was too large')
+            screen.blit(quit_message,  (0, 0))
+            flip()
+            time.sleep(5)
+            quit()
+        elif y < 10:
+            pass
+    else:
+        pass
     
     if x > 0:
         xvalue = 219 + 17 * x
@@ -86,9 +98,9 @@ while loops < 200: #repeat the rule thingamy
     
     if y > 0:
         yvalue = 300 - 17 * y
-    elif x < 0:
-        yvalue = 300 + 17 * y
-    elif x == 0:
+    elif y < 0:
+        yvalue = 300 + 17 * (-1*y)
+    elif y == 0:
         yvalue = 300
     
     print('y:')
@@ -105,6 +117,9 @@ while loops < 200: #repeat the rule thingamy
     
     loops = loops+1
 
+    pointfulfill() #at the end, so the adding works (hopefully)
+
+
 def drawlines():
     #draw an antialiased line between two points
     pygame.draw.aalines(screen,  black,  False,  pointlist,  0)
@@ -120,6 +135,7 @@ def reset():
     drawbuttonclicked = False
 #keep the window active, and also control if it shuts down
 while running:
+    
     #find the mouse
     mouse_position = pygame.mouse.get_pos()
     

@@ -19,6 +19,7 @@ def flip():
     
 #basic math variables
 x = (0)
+mx = (-200)
 xbase = int(219)
 ybase = int(300)
 loops = int(0)
@@ -75,14 +76,21 @@ flip
 raw = raw_input('y =')
 
 pointlist = [] #point list for the variables
+minuspointlist = []  
  
 def pointfulfill():
     pointlist.append( (xvalue,  yvalue),  )
- 
+  
+def minuspointfulfill():
+    minuspointlist.append( (minusxvalue, minusyvalue),  )
+    
 while loops < 200: #repeat the rule thingamy
 
     y = eval(raw)
     x = x
+    
+    my = eval(raw)
+    mx = mx
     
     if loops < 2:
         if y > 10:
@@ -109,7 +117,25 @@ while loops < 200: #repeat the rule thingamy
         yvalue = 300 + 17 * (-1*y)
     elif y == 0:
         yvalue = 300
+        
+    if mx < 0:
+        minusxvalue = 219 - 17 * x
+    elif mx > 0:
+        minusxvalue = 219 + 17 * x
+    elif mx == 0:
+        minusxvalue = 219
     
+    if my < 0 and y != (x*x):
+        minusyvalue = 300 + 17 * y
+    elif my > 0 and y != (x*x):
+        minusyvalue = 300 - 17 * (-1*y)
+    if my < 0 and y == (x*x):
+        minusyvalue = 300 - 17 * y
+    elif my > 0 and y == (x*x):
+        minusyvalue = 300 + 17 * (-1*y)
+    elif my == 0:
+        minusyvalue = 300
+        
     print('y:')
     print(y)
     print('x:')
@@ -119,17 +145,24 @@ while loops < 200: #repeat the rule thingamy
     print(xvalue)
     print('yvalue:')
     print(yvalue)
+    print('minusxvalue:')
+    print(minusxvalue)
+    print('minusyvalue:')
+    print(minusyvalue)
     
     x = x+0.1
+    mx = mx+0.1
     
     loops = loops+1
 
     pointfulfill() #at the end, so the adding works (hopefully)
+    minuspointfulfill()
 
 
 def drawlines():
     #draw an antialiased line between two points
     pygame.draw.aalines(screen,  black,  False,  pointlist,  0)
+    pygame.draw.aalines(screen,  black,  False,  minuspointlist, 0)
 
 def reset():
     #colour the background again to erase whatever is above

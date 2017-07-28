@@ -159,6 +159,22 @@ while loops < 200: #repeat the rule thingamy
     pointfulfill() #at the end, so the adding works (hopefully)
     minuspointfulfill()
 
+    if xvalue > 406:
+        loops = 200
+    if yvalue > 487:
+        loops = 200
+    if xvalue < 219:
+        loops = 200
+    if yvalue < 110:
+        loops = 200
+    if minusxvalue > 219:
+        loops = 200
+    if minusyvalue > 487:
+        loops = 200
+    if minusxvalue < 29:
+        loops = 200
+    if minusyvalue <  110:
+        loops = 200
 
 def drawlines():
     #draw an antialiased line between two points

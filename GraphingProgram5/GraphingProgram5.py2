@@ -1,5 +1,4 @@
-#going to stop the line going off the edge of the graph, and add mathematical functions like sin, cos, and tan
-
+#when finished will have improved graph, can go higher than eleven, and writes the numbers to the axis, depending on how high the first values are (1-10, 10-100, 100-1000, etc)
 
 
 #Hi, whoever is reading this is about to be very annoyed. I only learnt about definitons for functions halfway through this projecct, so there are none. I will use them next time. Sorry!
@@ -20,8 +19,8 @@ cos = math.cos
 tan = math.tan
 x = (0)
 mx = (-200)
-xbase = int(219)
-ybase = int(300)
+xbase = int(292)
+ybase = int(340)
 loops = int(0)
 drawbuttonclicked = False
 xvalue = xbase
@@ -30,7 +29,7 @@ shiftpressed = False
 
 #set image variables for import
 #unclicked buttons
-plane_image = pygame.image.load('axis.png')
+plane_image = pygame.image.load('blank-graph.gif')
 exit_button_image_unclicked = pygame.image.load('exit_button_unclicked.png')
 clear_button_image_unclicked = pygame.image.load('clear_button_unclicked.png')
 draw_button_image_unclicked = pygame.image.load('draw_button_unclicked.png')
@@ -42,7 +41,7 @@ draw_button_image_clicked = pygame.image.load('draw_button_clicked.png')
 quit_message = pygame.image.load('quit_message.png')
 
 #setup the display window
-(width, height) = (504, 550)
+(width, height) = (593, 622)
 screen = pygame.display.set_mode((width, height))
 running = True
 
@@ -60,7 +59,7 @@ buttonlength = 128
 
 #some standard spacing/variables for common use
 standardspacing = 30
-absolutezero = (219, 300)
+absolutezero = (292,  340)
 
 #is the button clicked? hmm
 drawbuttonclicker = False
@@ -85,7 +84,7 @@ def pointfulfill():
 def minuspointfulfill():
     minuspointlist.append( (minusxvalue, minusyvalue),  )
     
-while loops < 200: #repeat the rule thingamy
+while loops < 800: #repeat the rule thingamy
 
     y = eval(raw)
     x = x
@@ -93,49 +92,49 @@ while loops < 200: #repeat the rule thingamy
     my = eval(raw)
     mx = mx
     
-    if loops < 2:
-        if y > 10:
-            print('the rule created a value that was too large')
-            screen.blit(quit_message,  (0, 0))
-            flip()
-            time.sleep(5)
-            quit()
-        elif y < 10:
-            pass
-    else:
-        pass
+#    if loops < 2:
+#        if y > 10:
+#            print('the rule created a value that was too large')
+#            screen.blit(quit_message,  (0, 0))
+#            flip()
+#            time.sleep(5)
+#            quit()
+#        elif y < 10:
+#            pass
+#    else:
+#        pass
     
     if x > 0:
-        xvalue = 219 + 17 * x
+        xvalue = 292 + 16 * x
     elif x < 0:
-        xvalue = 219 - 17 * x
+        xvalue = 292 - 16 * x
     elif x == 0:
-        xvalue = 219
+        xvalue = 292
     
     if y > 0:
-        yvalue = 300 - 17 * y
+        yvalue = 340 - 16 * y
     elif y < 0:
-        yvalue = 300 + 17 * (-1*y)
+        yvalue = 340 + 16 * (-1*y)
     elif y == 0:
-        yvalue = 300
+        yvalue = 340
         
     if mx < 0:
-        minusxvalue = 219 - 17 * x
+        minusxvalue = 292 - 16 * x
     elif mx > 0:
-        minusxvalue = 219 + 17 * x
+        minusxvalue = 292 + 16 * x
     elif mx == 0:
-        minusxvalue = 219
+        minusxvalue = 292
     
     if my < 0 and y != (x*x):
-        minusyvalue = 300 + 17 * y
+        minusyvalue = 340 + 16 * y
     elif my > 0 and y != (x*x):
-        minusyvalue = 300 - 17 * (-1*y)
+        minusyvalue = 340 - 16 * (-1*y)
     if my < 0 and y == (x*x):
-        minusyvalue = 300 - 17 * y
+        minusyvalue = 340 - 16 * y
     elif my > 0 and y == (x*x):
-        minusyvalue = 300 + 17 * (-1*y)
+        minusyvalue = 340 + 16 * (-1*y)
     elif my == 0:
-        minusyvalue = 300
+        minusyvalue = 340
         
     print('y:')
     print(y)
@@ -159,22 +158,23 @@ while loops < 200: #repeat the rule thingamy
     pointfulfill() #at the end, so the adding works (hopefully)
     minuspointfulfill()
 
-    if xvalue > 406:
-        loops = 200
-    if yvalue > 487:
-        loops = 200
-    if xvalue < 219:
-        loops = 200
-    if yvalue < 110:
-        loops = 200
-    if minusxvalue > 219:
-        loops = 200
-    if minusyvalue > 487:
-        loops = 200
-    if minusxvalue < 29:
-        loops = 200
-    if minusyvalue <  110:
-        loops = 200
+    if xvalue > 593:
+        loops = 800
+    if yvalue > 612:
+        loops = 800
+    if xvalue < 292:
+        loops = 800
+    if yvalue < 100:
+        loops = 800
+    
+#    if minusxvalue > 292:
+#        loops = 800
+#    if minusyvalue > 612:
+#        loops = 800
+#    if minusxvalue < 10:
+#        loops = 800
+#    if minusyvalue <  60:
+#        loops = 800
 
 def drawlines():
     #draw an antialiased line between two points

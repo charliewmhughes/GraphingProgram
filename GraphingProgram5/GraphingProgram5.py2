@@ -22,7 +22,7 @@ sin = math.sin
 cos = math.cos
 tan = math.tan
 x = (0)
-mx = (-200)
+mx = (-5)
 xbase = int(295)
 ybase = int(368)
 loops = int(0)
@@ -86,6 +86,7 @@ screen.fill(background_colour)
 flip
 
 raw = raw_input('y =')
+minusraw = "m" + raw
 
 pointlist = [] #point list for the variables
 minuspointlist = []  
@@ -101,7 +102,7 @@ while loops < 800: #repeat the rule thingamy
     y = eval(raw)
     x = x
     
-    my = eval(raw)
+    my = eval(minusraw)
     mx = mx
     
 #    if loops < 2:
@@ -130,23 +131,20 @@ while loops < 800: #repeat the rule thingamy
     elif y == 0:
         yvalue = 368
         
-    if mx < 0:
-        minusxvalue = 295 - moveval * x
-    elif mx > 0:
+    if mx > 0:
         minusxvalue = 295 + moveval * x
-    elif mx == 0:
-        minusxvalue = 295
+    elif mx < 0:
+        minusxvalue = 295 - moveval * x
+    elif x == 0:
+        mxvalue = 295
     
-    if my < 0 and y != (x*x):
-        minusyvalue = 368 + moveval * y
-    elif my > 0 and y != (x*x):
-        minusyvalue = 368 - moveval * (-1*y)
-    if my < 0 and y == (x*x):
-        minusyvalue = 368 - moveval * y
-    elif my > 0 and y == (x*x):
-        minusyvalue = 368 + moveval * (-1*y)
+    if my > 0:
+        minusyvalue = 368 - moveval * my
+    elif my < 0:
+        minusyvalue = 368 + moveval * (-1*my)
     elif my == 0:
         minusyvalue = 368
+        
         
     print('y:')
     print(y)
@@ -190,7 +188,7 @@ while loops < 800: #repeat the rule thingamy
 
 def drawlines():
     #draw an antialiased line between two points
-    pygame.draw.aalines(screen,  black,  False,  pointlist,  10)
+#    pygame.draw.aalines(screen,  black,  False,  pointlist,  10)
     pygame.draw.aalines(screen,  black,  False,  minuspointlist, 10)
 
 def reset():

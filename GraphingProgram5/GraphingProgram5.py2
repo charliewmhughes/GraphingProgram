@@ -13,35 +13,47 @@ from pygame.locals import*
 def flip():
     pygame.display.flip()
     
+#set the icon first
+icon = pygame.image.load('icon.png')
+pygame.display.set_icon(icon)
+ 
 #basic math variables
 sin = math.sin
 cos = math.cos
 tan = math.tan
 x = (0)
 mx = (-200)
-xbase = int(292)
-ybase = int(340)
+xbase = int(295)
+ybase = int(368)
 loops = int(0)
 drawbuttonclicked = False
 xvalue = xbase
 yvalue = ybase
 shiftpressed = False
 
+#gap to move per coordinate
+moveval = 57
+
 #set image variables for import
 #unclicked buttons
-plane_image = pygame.image.load('blank-graph.gif')
+plane_image = pygame.image.load('axis.png')
 exit_button_image_unclicked = pygame.image.load('exit_button_unclicked.png')
 clear_button_image_unclicked = pygame.image.load('clear_button_unclicked.png')
 draw_button_image_unclicked = pygame.image.load('draw_button_unclicked.png')
+
 #clicked buttons
 exit_button_image_clicked = pygame.image.load('exit_button_clicked.png')
 clear_button_image_clicked = pygame.image.load('clear_button_clicked.png')
 draw_button_image_clicked = pygame.image.load('draw_button_clicked.png')
+
 #quit_message display (error etc.)
 quit_message = pygame.image.load('quit_message.png')
 
+#numbers for plane
+number_one = pygame.image.load('numberone.png')
+
 #setup the display window
-(width, height) = (593, 622)
+(width, height) = (593, 662)
 screen = pygame.display.set_mode((width, height))
 running = True
 
@@ -54,12 +66,12 @@ pygame.display.set_caption('Graphing Program')
 
 #some button variables (bit late sorry)
 buttonyvariable = 30
-spacing = 30
+spacing = 51
 buttonlength = 128
 
 #some standard spacing/variables for common use
-standardspacing = 30
-absolutezero = (292,  340)
+standardspacing = 52.25
+absolutezero = (295,  368)
 
 #is the button clicked? hmm
 drawbuttonclicker = False
@@ -105,36 +117,36 @@ while loops < 800: #repeat the rule thingamy
 #        pass
     
     if x > 0:
-        xvalue = 292 + 16 * x
+        xvalue = 295 + moveval * x
     elif x < 0:
-        xvalue = 292 - 16 * x
+        xvalue = 295 - moveval * x
     elif x == 0:
-        xvalue = 292
+        xvalue = 295
     
     if y > 0:
-        yvalue = 340 - 16 * y
+        yvalue = 368 - moveval * y
     elif y < 0:
-        yvalue = 340 + 16 * (-1*y)
+        yvalue = 368 + moveval * (-1*y)
     elif y == 0:
-        yvalue = 340
+        yvalue = 368
         
     if mx < 0:
-        minusxvalue = 292 - 16 * x
+        minusxvalue = 295 - moveval * x
     elif mx > 0:
-        minusxvalue = 292 + 16 * x
+        minusxvalue = 295 + moveval * x
     elif mx == 0:
-        minusxvalue = 292
+        minusxvalue = 295
     
     if my < 0 and y != (x*x):
-        minusyvalue = 340 + 16 * y
+        minusyvalue = 368 + moveval * y
     elif my > 0 and y != (x*x):
-        minusyvalue = 340 - 16 * (-1*y)
+        minusyvalue = 368 - moveval * (-1*y)
     if my < 0 and y == (x*x):
-        minusyvalue = 340 - 16 * y
+        minusyvalue = 368 - moveval * y
     elif my > 0 and y == (x*x):
-        minusyvalue = 340 + 16 * (-1*y)
+        minusyvalue = 368 + moveval * (-1*y)
     elif my == 0:
-        minusyvalue = 340
+        minusyvalue = 368
         
     print('y:')
     print(y)
@@ -158,13 +170,13 @@ while loops < 800: #repeat the rule thingamy
     pointfulfill() #at the end, so the adding works (hopefully)
     minuspointfulfill()
 
-    if xvalue > 593:
+    if xvalue > 583:
         loops = 800
-    if yvalue > 612:
+    if yvalue > 654:
         loops = 800
-    if xvalue < 292:
+    if xvalue < 295:
         loops = 800
-    if yvalue < 100:
+    if yvalue < 80:
         loops = 800
     
 #    if minusxvalue > 292:
@@ -178,15 +190,15 @@ while loops < 800: #repeat the rule thingamy
 
 def drawlines():
     #draw an antialiased line between two points
-    pygame.draw.aalines(screen,  black,  False,  pointlist,  5)
-    pygame.draw.aalines(screen,  black,  False,  minuspointlist, 5)
+    pygame.draw.aalines(screen,  black,  False,  pointlist,  10)
+    pygame.draw.aalines(screen,  black,  False,  minuspointlist, 10)
 
 def reset():
     #colour the background again to erase whatever is above
     background_colour = (white)
     screen.fill(background_colour)
     #place the cartesian pane
-    screen.blit(plane_image,  (10, 60))
+    screen.blit(plane_image,  (10, 80))
     #bop it, twist it, flip it
     flip()
     drawbuttonclicked = False
@@ -198,7 +210,7 @@ while running:
     mouse_position = pygame.mouse.get_pos()
     
     #place the cartesian pane
-    screen.blit(plane_image,  (10, 60))
+    screen.blit(plane_image,  (10, 80))
     
     #place buttons at the top
     #draw button

@@ -4,7 +4,7 @@
 
 #!!!!! --- I have stayed up till 23:00 to get this code in working condition. All basic rules work (i.e. x*x, x*number, x+number) So yeah... Happy about that, might go to sleep soon. I hope to introduce those letters onto the graph soon, then maybe a GUI to enter the rule instead of the shell. --- !!!!!
 #annnd i need to make the lines not overspill the cartesian plane. Anyway, i can do that tomorrow.
-
+#just realised division doesn't work. Oh well, problem for another time...
 
 
 #permanent, last edited, rev 1:

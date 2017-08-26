@@ -21,8 +21,8 @@ pygame.display.set_icon(icon)
 sin = math.sin
 cos = math.cos
 tan = math.tan
-x = (0)
-mx = (-5)
+x = (-20)
+#mx = (-5)
 xbase = int(295)
 ybase = int(368)
 loops = int(0)
@@ -89,7 +89,7 @@ raw = raw_input('y =')
 minusraw = "m" + raw
 
 pointlist = [] #point list for the variables
-minuspointlist = []  
+#minuspointlist = []  
  
 def pointfulfill():
     pointlist.append( (xvalue,  yvalue),  )
@@ -102,8 +102,8 @@ while loops < 800: #repeat the rule thingamy
     y = eval(raw)
     x = x
     
-    my = eval(minusraw)
-    mx = mx
+#    my = eval(minusraw)
+#    mx = mx
     
 #    if loops < 2:
 #        if y > 10:
@@ -117,8 +117,13 @@ while loops < 800: #repeat the rule thingamy
 #    else:
 #        pass
     
-    if x > 0:
+    if x > 0 and y < 0:
         xvalue = 295 + moveval * x
+    elif x < 0 and y < 0:
+        xvalue = 295 +moveval * x
+    elif x > 0:
+        xvalue = 295 + moveval * x
+        
     elif x < 0:
         xvalue = 295 - moveval * x
     elif x == 0:
@@ -131,19 +136,19 @@ while loops < 800: #repeat the rule thingamy
     elif y == 0:
         yvalue = 368
         
-    if mx > 0:
-        minusxvalue = 295 + moveval * x
-    elif mx < 0:
-        minusxvalue = 295 - moveval * x
-    elif x == 0:
-        mxvalue = 295
-    
-    if my > 0:
-        minusyvalue = 368 - moveval * my
-    elif my < 0:
-        minusyvalue = 368 + moveval * (-1*my)
-    elif my == 0:
-        minusyvalue = 368
+#    if mx > 0:
+#        minusxvalue = 295 + moveval * x
+#    elif mx < 0:
+#        minusxvalue = 295 - moveval * x
+#    elif x == 0:
+#        mxvalue = 295
+#    
+#    if my > 0:
+#        minusyvalue = 368 - moveval * my
+#    elif my < 0:
+#        minusyvalue = 368 + moveval * (-1*my)
+#    elif my == 0:
+#        minusyvalue = 368
         
         
     print('y:')
@@ -155,27 +160,27 @@ while loops < 800: #repeat the rule thingamy
     print(xvalue)
     print('yvalue:')
     print(yvalue)
-    print('minusxvalue:')
-    print(minusxvalue)
-    print('minusyvalue:')
-    print(minusyvalue)
+#    print('minusxvalue:')
+#    print(minusxvalue)
+#    print('minusyvalue:')
+#    print(minusyvalue)
     
     x = x+0.1
-    mx = mx+0.1
+#    mx = mx+0.1
     
     loops = loops+1
 
     pointfulfill() #at the end, so the adding works (hopefully)
-    minuspointfulfill()
+#    minuspointfulfill()
 
-    if xvalue > 583:
-        loops = 800
-    if yvalue > 654:
-        loops = 800
-    if xvalue < 295:
-        loops = 800
-    if yvalue < 80:
-        loops = 800
+#    if xvalue > 583:
+#        loops = 800
+#    if yvalue > 654:
+#        loops = 800
+#    if xvalue < 295:
+#        loops = 800
+#    if yvalue < 80:
+#        loops = 800
     
 #    if minusxvalue > 292:
 #        loops = 800
@@ -188,8 +193,8 @@ while loops < 800: #repeat the rule thingamy
 
 def drawlines():
     #draw an antialiased line between two points
-#    pygame.draw.aalines(screen,  black,  False,  pointlist,  10)
-    pygame.draw.aalines(screen,  black,  False,  minuspointlist, 10)
+    pygame.draw.aalines(screen,  black,  False,  pointlist,  10)
+#    pygame.draw.aalines(screen,  black,  False,  minuspointlist, 10)
 
 def reset():
     #colour the background again to erase whatever is above

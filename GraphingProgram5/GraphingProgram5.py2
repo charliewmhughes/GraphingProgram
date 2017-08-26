@@ -1,7 +1,15 @@
-#when finished will have improved graph, can go higher than eleven, and writes the numbers to the axis, depending on how high the first values are (1-10, 10-100, 100-1000, etc)
+#when finished will have improved graph, can go higher than eleven, and writes the numbers to the axis, depending on how high the first values are (1-10, 10-100, 100-1000, etc), adding numbers will work, and maybe some other shit.
+#i'm gonna try subtracting on each looop instead of adding (to the x var) --- note, this has been revoked to the earlier version ---
+#any commented out code is assumed redundant, but there just in case
+
+#!!!!! --- I have stayed up till 23:00 to get this code in working condition. All basic rules work (i.e. x*x, x*number, x+number) So yeah... Happy about that, might go to sleep soon. I hope to introduce those letters onto the graph soon, then maybe a GUI to enter the rule instead of the shell. --- !!!!!
+#annnd i need to make the lines not overspill the cartesian plane. Anyway, i can do that tomorrow.
 
 
+
+#permanent, last edited, rev 1:
 #Hi, whoever is reading this is about to be very annoyed. I only learnt about definitons for functions halfway through this projecct, so there are none. I will use them next time. Sorry!
+#end comment.
 
 #import modules
 import pygame
@@ -21,7 +29,7 @@ pygame.display.set_icon(icon)
 sin = math.sin
 cos = math.cos
 tan = math.tan
-x = (-20)
+x = (-10)
 #mx = (-5)
 xbase = int(295)
 ybase = int(368)
@@ -116,14 +124,17 @@ while loops < 800: #repeat the rule thingamy
 #            pass
 #    else:
 #        pass
+
+
     
     if x > 0 and y < 0:
         xvalue = 295 + moveval * x
     elif x < 0 and y < 0:
-        xvalue = 295 +moveval * x
+        xvalue = 295 + moveval * x
+    elif x < 0 and y > 0:
+        xvalue = 295 + moveval * x
     elif x > 0:
         xvalue = 295 + moveval * x
-        
     elif x < 0:
         xvalue = 295 - moveval * x
     elif x == 0:
@@ -173,11 +184,15 @@ while loops < 800: #repeat the rule thingamy
     pointfulfill() #at the end, so the adding works (hopefully)
 #    minuspointfulfill()
 
-#    if xvalue > 583:
-#        loops = 800
+
+#this makes the program stop when it unnececarily does shit so it doesn't eat up cpu time
+    if xvalue > 583:
+        loops = 800
 #    if yvalue > 654:
 #        loops = 800
-#    if xvalue < 295:
+#    if x < -10:
+#        loops = 800
+#    if y < -10:
 #        loops = 800
 #    if yvalue < 80:
 #        loops = 800

@@ -31,13 +31,14 @@ cos = math.cos
 tan = math.tan
 x = (-10)
 #mx = (-5)
-xbase = int(295)
+xbase = int(305)
 ybase = int(368)
 loops = int(0)
 drawbuttonclicked = False
 xvalue = xbase
 yvalue = ybase
 shiftpressed = False
+zoom = ('onefive')
 
 #gap to move per coordinate
 moveval = 57
@@ -59,9 +60,31 @@ quit_message = pygame.image.load('quit_message.png')
 
 #numbers for plane
 number_one = pygame.image.load('numberone.png')
+number_two = pygame.image.load('numbertwo.png')
+number_three = pygame.image.load('numberthree.png')
+number_four = pygame.image.load('numberfour.png')
+number_five = pygame.image.load('numberfive.png')
+
+number_minus_one = pygame.image.load('numberminusone.png')
+number_minus_two = pygame.image.load('numberminustwo.png')
+number_minus_three = pygame.image.load('numberminusthree.png')
+number_minus_four = pygame.image.load('numberminusfour.png')
+number_minus_five = pygame.image.load('numberminusfive.png')
+
+number_ten = pygame.image.load('numberten.png')
+number_twenty = pygame.image.load('numbertwenty.png')
+number_thirty = pygame.image.load('numberthirty.png')
+number_fourty = pygame.image.load('numberfourty.png')
+number_fifty = pygame.image.load('numberfifty.png')
+
+number_minus_ten = pygame.image.load('numberminusten.png')
+number_minus_twenty = pygame.image.load('numberminustwenty.png')
+number_minus_thirty = pygame.image.load('numberminusthirty.png')
+number_minus_fourty = pygame.image.load('numberminusfourty.png')
+number_minus_fifty = pygame.image.load('numberminusfifty.png')
 
 #setup the display window
-(width, height) = (593, 662)
+(width, height) = (613, 682)
 screen = pygame.display.set_mode((width, height))
 running = True
 
@@ -77,9 +100,12 @@ buttonyvariable = 30
 spacing = 51
 buttonlength = 128
 
+#number spacing
+numbspace = 380
+
 #some standard spacing/variables for common use
 standardspacing = 52.25
-absolutezero = (295,  368)
+absolutezero = (xbase,  ybase)
 
 #is the button clicked? hmm
 drawbuttonclicker = False
@@ -128,38 +154,38 @@ while loops < 800: #repeat the rule thingamy
 
     
     if x > 0 and y < 0:
-        xvalue = 295 + moveval * x
+        xvalue = xbase + moveval * x
     elif x < 0 and y < 0:
-        xvalue = 295 + moveval * x
+        xvalue = xbase + moveval * x
     elif x < 0 and y > 0:
-        xvalue = 295 + moveval * x
+        xvalue = xbase + moveval * x
     elif x > 0:
-        xvalue = 295 + moveval * x
+        xvalue = xbase + moveval * x
     elif x < 0:
-        xvalue = 295 - moveval * x
+        xvalue = xbase - moveval * x
     elif x == 0:
-        xvalue = 295
+        xvalue = xbase
     
     if y > 0:
-        yvalue = 368 - moveval * y
+        yvalue = ybase - moveval * y
     elif y < 0:
-        yvalue = 368 + moveval * (-1*y)
+        yvalue = ybase + moveval * (-1*y)
     elif y == 0:
-        yvalue = 368
+        yvalue = ybase
         
 #    if mx > 0:
-#        minusxvalue = 295 + moveval * x
+#        minusxvalue = xbase + moveval * x
 #    elif mx < 0:
-#        minusxvalue = 295 - moveval * x
+#        minusxvalue = xbase - moveval * x
 #    elif x == 0:
-#        mxvalue = 295
+#        mxvalue = xbase
 #    
 #    if my > 0:
-#        minusyvalue = 368 - moveval * my
+#        minusyvalue = ybase - moveval * my
 #    elif my < 0:
-#        minusyvalue = 368 + moveval * (-1*my)
+#        minusyvalue = ybase + moveval * (-1*my)
 #    elif my == 0:
-#        minusyvalue = 368
+#        minusyvalue = ybase
         
         
     print('y:')
@@ -180,8 +206,11 @@ while loops < 800: #repeat the rule thingamy
 #    mx = mx+0.1
     
     loops = loops+1
-
-    pointfulfill() #at the end, so the adding works (hopefully)
+    
+    if x > 5 or x < -5 or y > 5 or y < -5:
+        pass
+    else:
+        pointfulfill() #at the end, so the adding works (hopefully)
 #    minuspointfulfill()
 
 
@@ -228,7 +257,35 @@ while running:
     mouse_position = pygame.mouse.get_pos()
     
     #place the cartesian pane
-    screen.blit(plane_image,  (10, 80))
+    screen.blit(plane_image,  (20, 80))
+    
+    #place the numbers near where they should be
+    if zoom == ('onefive'):
+        #x numbs
+        screen.blit(number_one,  (342, numbspace))
+        screen.blit(number_two,  (399, numbspace))
+        screen.blit(number_three,  (456, numbspace))
+        screen.blit(number_four,  (513, numbspace))
+        screen.blit(number_five,  (570, numbspace))
+        
+        screen.blit(number_minus_one,  (228, numbspace))
+        screen.blit(number_minus_two,  (171, numbspace))
+        screen.blit(number_minus_three,  (114, numbspace))
+        screen.blit(number_minus_four,  (57, numbspace))
+        screen.blit(number_minus_five,  (0, numbspace))
+    
+        #y numbs
+        screen.blit(number_one,  (numbspace - 70,  311))
+        screen.blit(number_two,  (numbspace - 70,  254))
+        screen.blit(number_three,  (numbspace - 70,  197))
+        screen.blit(number_four,  (numbspace - 70,  140))
+        screen.blit(number_five,  (numbspace - 70,  83))
+        
+        screen.blit(number_minus_one,  (numbspace - 70,  425))
+        screen.blit(number_minus_two,  (numbspace - 70, 482))
+        screen.blit(number_minus_three,  (numbspace - 70,  539))
+        screen.blit(number_minus_four,  (numbspace - 70, 596 ))
+        screen.blit(number_minus_five,  (numbspace - 70,  653))
     
     #place buttons at the top
     #draw button

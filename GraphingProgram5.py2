@@ -45,7 +45,7 @@ moveval = 57
 
 #set image variables for import
 #unclicked buttons
-plane_image = pygame.image.load('axis.png')
+plane_image = pygame.image.load('axisnew.png')
 exit_button_image_unclicked = pygame.image.load('exit_button_unclicked.png')
 clear_button_image_unclicked = pygame.image.load('clear_button_unclicked.png')
 draw_button_image_unclicked = pygame.image.load('draw_button_unclicked.png')

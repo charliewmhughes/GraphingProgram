@@ -1,0 +1,390 @@
+#any commented out code is assumed redundant, but there in case it is needed again at some point
+
+#division not working, line is messy and doesn't got to the end of the graph/overspills.
+
+#import modules
+import pygame
+import time
+import math
+from pygame.locals import*
+import GUIkeyboardinput
+
+GUIkeyboardinput.test()
+
+#we will be flipping the display often
+def flip():
+    pygame.display.flip()
+    
+#set the icon first
+icon = pygame.image.load('icon.png')
+pygame.display.set_icon(icon)
+ 
+#basic math variables
+sin = math.sin
+cos = math.cos
+tan = math.tan
+x = (-10)
+#mx = (-5)
+xbase = int(315)
+ybase = int(368)
+loops = int(0)
+drawbuttonclicked = False
+xvalue = xbase
+yvalue = ybase
+shiftpressed = False
+zoom = ('zero2five')
+verticalremove = 60
+multiplicationamount = 1
+divisionamount = 0.1
+
+#gap to move per coordinate
+moveval = 57
+
+#set image variables for import
+#unclicked buttons
+plane_image = pygame.image.load('axisnew.png')
+exit_button_image_unclicked = pygame.image.load('exit_button_unclicked.png')
+clear_button_image_unclicked = pygame.image.load('clear_button_unclicked.png')
+draw_button_image_unclicked = pygame.image.load('draw_button_unclicked.png')
+
+#clicked buttons
+exit_button_image_clicked = pygame.image.load('exit_button_clicked.png')
+clear_button_image_clicked = pygame.image.load('clear_button_clicked.png')
+draw_button_image_clicked = pygame.image.load('draw_button_clicked.png')
+
+#quit_message display (error etc.)
+quit_message = pygame.image.load('quit_message.png')
+
+#numbers for plane
+number_zero = pygame.image.load('numberzero.png')
+
+number_one = pygame.image.load('numberone.png')
+number_two = pygame.image.load('numbertwo.png')
+number_three = pygame.image.load('numberthree.png')
+number_four = pygame.image.load('numberfour.png')
+number_five = pygame.image.load('numberfive.png')
+
+number_minus_one = pygame.image.load('numberminusone.png')
+number_minus_two = pygame.image.load('numberminustwo.png')
+number_minus_three = pygame.image.load('numberminusthree.png')
+number_minus_four = pygame.image.load('numberminusfour.png')
+number_minus_five = pygame.image.load('numberminusfive.png')
+
+number_ten = pygame.image.load('numberten.png')
+number_twenty = pygame.image.load('numbertwenty.png')
+number_thirty = pygame.image.load('numberthirty.png')
+number_forty = pygame.image.load('numberforty.png')
+number_fifty = pygame.image.load('numberfifty.png')
+
+number_minus_ten = pygame.image.load('numberminusten.png')
+number_minus_twenty = pygame.image.load('numberminustwenty.png')
+number_minus_thirty = pygame.image.load('numberminusthirty.png')
+number_minus_forty = pygame.image.load('numberminusforty.png')
+number_minus_fifty = pygame.image.load('numberminusfifty.png')
+
+#setup the display window
+(width, height) = (633, 682)
+screen = pygame.display.set_mode((width, height))
+running = True
+
+#set colour variables
+white = (255,  255,  255)
+black = (0,  0,  0)
+
+#give the display window a title
+pygame.display.set_caption('Graphing Program')
+
+#some button variables (bit late sorry)
+buttonyvariable = 30
+spacing = 51
+buttonlength = 128
+
+#number spacing
+numbspace = 380
+
+#some standard spacing/variables for common use
+standardspacing = 52.25
+absolutezero = (xbase,  ybase)
+
+#is the button clicked? hmm
+drawbuttonclicker = False
+clearbuttonclicker = False
+exitbuttonclicker = False
+
+#colour the background again to erase whatever is above
+background_colour = (white)
+screen.fill(background_colour)
+
+#bop it, twist it, flip it
+flip()
+
+raw = raw_input('y =')
+minusraw = "m" + raw
+
+pointlist = [] #point list for the variables
+#minuspointlist = []  
+ 
+def pointfulfill():
+    pointlist.append( (xvalue,  yvalue),  )
+  
+def minuspointfulfill():
+    minuspointlist.append( (minusxvalue, minusyvalue),  )
+    
+if eval(raw) > -51:
+    zoom = ('zero2five')
+    divisionamount = 1
+elif eval(raw) < -51:
+    zoom = ('five2fifty')
+    divisionamount = 0.1
+else:
+    pass
+    
+while loops < 800: #repeat the rule thingamy
+
+    y = (eval(raw) * divisionamount)
+    x = x
+    
+#    my = eval(minusraw)
+#    mx = mx
+    
+#    if loops < 2:
+#        if y > 10:
+#            print('the rule created a value that was too large')
+#            screen.blit(quit_message,  (0, 0))
+#            flip()
+#            time.sleep(5)
+#            quit()
+#        elif y < 10:
+#            pass
+#    else:
+#        pass
+
+
+    
+    if x > 0 and y < 0:
+        xvalue = (xbase + (moveval * x * multiplicationamount))
+    elif x < 0 and y < 0:
+        xvalue = (xbase + (moveval * x * multiplicationamount))
+    elif x < 0 and y > 0:
+        xvalue = (xbase + (moveval * x * multiplicationamount))
+    elif x > 0:
+        xvalue = (xbase + (moveval * x * multiplicationamount))
+    elif x < 0:
+        xvalue = (xbase - (moveval * x * multiplicationamount))
+    elif x == 0:
+        xvalue = xbase
+    
+    if y > 0:
+        yvalue = (ybase - (moveval * y * multiplicationamount))
+    elif y < 0:
+        yvalue = (ybase + (moveval * (-1*y) * multiplicationamount))
+    elif y == 0:
+        yvalue = ybase
+        
+#    if mx > 0:
+#        minusxvalue = xbase + moveval * x
+#    elif mx < 0:
+#        minusxvalue = xbase - moveval * x
+#    elif x == 0:
+#        mxvalue = xbase
+#    
+#    if my > 0:
+#        minusyvalue = ybase - moveval * my
+#    elif my < 0:
+#        minusyvalue = ybase + moveval * (-1*my)
+#    elif my == 0:
+#        minusyvalue = ybase
+        
+        
+    print('y:')
+    print(y)
+    print('x:')
+    print(x)
+    
+    print('xvalue:')
+    print(xvalue)
+    print('yvalue:')
+    print(yvalue)
+#    print('minusxvalue:')
+#    print(minusxvalue)
+#    print('minusyvalue:')
+#    print(minusyvalue)
+    
+    x = x+0.1
+#    mx = mx+0.1
+    
+    loops = loops+1
+    
+    if x > 5 or x < -5 or y > 5 or y < -5:
+        pass
+    else:
+        pointfulfill() #at the end, so the adding works (hopefully)
+#    minuspointfulfill()
+
+
+#this makes the program stop when it unnececarily does shit so it doesn't eat up cpu time
+    if xvalue > 593:
+        loops = 800
+#    if yvalue > 654:
+#        loops = 800
+#    if x < -10:
+#        loops = 800
+#    if y < -10:
+#        loops = 800
+#    if yvalue < 80:
+#        loops = 800
+    
+#    if minusxvalue > 292:
+#        loops = 800
+#    if minusyvalue > 612:
+#        loops = 800
+#    if minusxvalue < 10:
+#        loops = 800
+#    if minusyvalue <  60:
+#        loops = 800
+
+def drawlines():
+    #draw an antialiased line between two points
+    pygame.draw.aalines(screen,  black,  False,  pointlist,  10)
+#    pygame.draw.aalines(screen,  black,  False,  minuspointlist, 10)
+
+def reset():
+    #colour the background again to erase whatever is above
+    background_colour = (white)
+    screen.fill(background_colour)
+    #place the cartesian pane
+    screen.blit(plane_image,  (10, 80))
+    #bop it, twist it, flip it
+    flip()
+    drawbuttonclicked = False
+    
+#keep the window active, and also control if it shuts down
+while running:
+    
+    time.sleep(0.03) #this means the program does not use as much cpu time as it would without the sleep. this variable is a trade off between responsiveness, and cpu usage. The higher the variable, the less cpu usage, the lower the variable, the more responsive the program is (clicks more likely to be within loop). The current value is probably best for the program.
+    
+    #find the mouse
+    mouse_position = pygame.mouse.get_pos()
+    
+    #place the cartesian pane
+    screen.blit(plane_image,  (30, 80))
+    
+    #place the origin
+    screen.blit(number_zero,  (xbase,  ybase))
+    
+    #place the numbers near where they should be
+    if zoom == ('zero2five'):
+        
+        #x numbs
+        screen.blit(number_one,  (377, numbspace))
+        screen.blit(number_two,  (434, numbspace))
+        screen.blit(number_three,  (491, numbspace))
+        screen.blit(number_four,  (548, numbspace))
+        screen.blit(number_five,  (605, numbspace))
+        
+        screen.blit(number_minus_one,  (263, numbspace))
+        screen.blit(number_minus_two,  (206, numbspace))
+        screen.blit(number_minus_three,  (149, numbspace))
+        screen.blit(number_minus_four,  (92, numbspace))
+        screen.blit(number_minus_five,  (35, numbspace))
+    
+        #y numbs
+        screen.blit(number_one,  (numbspace - verticalremove,  311))
+        screen.blit(number_two,  (numbspace - verticalremove,  254))
+        screen.blit(number_three,  (numbspace - verticalremove,  197))
+        screen.blit(number_four,  (numbspace - verticalremove,  140))
+        screen.blit(number_five,  (numbspace - verticalremove,  83))
+        
+        screen.blit(number_minus_one,  (numbspace - verticalremove,  425))
+        screen.blit(number_minus_two,  (numbspace - verticalremove, 482))
+        screen.blit(number_minus_three,  (numbspace - verticalremove,  539))
+        screen.blit(number_minus_four,  (numbspace - verticalremove, 596 ))
+        screen.blit(number_minus_five,  (numbspace - verticalremove,  653))
+    
+    elif zoom == ('five2fifty'): 
+        # x numbs
+        screen.blit(number_ten,  (377, numbspace))
+        screen.blit(number_twenty,  (434, numbspace))
+        screen.blit(number_thirty,  (491, numbspace))
+        screen.blit(number_forty,  (548, numbspace))
+        screen.blit(number_fifty,  (605, numbspace))
+        
+        screen.blit(number_minus_ten,  (263, numbspace))
+        screen.blit(number_minus_twenty,  (206, numbspace))
+        screen.blit(number_minus_thirty,  (149, numbspace))
+        screen.blit(number_minus_forty,  (92, numbspace))
+        screen.blit(number_minus_fifty,  (35, numbspace))
+        
+        #y numbs
+        screen.blit(number_ten,  (numbspace - verticalremove,  311))
+        screen.blit(number_twenty,  (numbspace - verticalremove,  254))
+        screen.blit(number_thirty,  (numbspace - verticalremove,  197))
+        screen.blit(number_forty,  (numbspace - verticalremove,  140))
+        screen.blit(number_fifty,  (numbspace - verticalremove,  83))
+        
+        screen.blit(number_minus_ten,  (numbspace - verticalremove,  425))
+        screen.blit(number_minus_twenty,  (numbspace - verticalremove, 482))
+        screen.blit(number_minus_thirty,   (numbspace - verticalremove,  539))
+        screen.blit(number_minus_forty,  (numbspace - verticalremove, 596 ))
+        screen.blit(number_minus_fifty,  (numbspace - verticalremove,  653))
+    else :
+        pass
+    #place buttons at the top
+    #draw button
+    if drawbuttonclicker == False:
+         screen.blit(draw_button_image_unclicked,  (spacing, buttonyvariable))
+    else:
+        screen.blit(draw_button_image_clicked,  (spacing, buttonyvariable))
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            drawbuttonclicked = True
+    
+    #clear button
+    if clearbuttonclicker == False:
+         screen.blit(clear_button_image_unclicked,  ((spacing+spacing+buttonlength),  buttonyvariable))
+    else:
+         screen.blit(clear_button_image_clicked,  ((spacing+spacing+buttonlength),  buttonyvariable))
+         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+             reset()
+    
+    #exit button
+    if exitbuttonclicker == False:
+         screen.blit(exit_button_image_unclicked,  ((spacing+spacing+spacing+buttonlength+buttonlength),  buttonyvariable))
+    else:
+        screen.blit(exit_button_image_clicked,  ((spacing+spacing+spacing+buttonlength+buttonlength),  buttonyvariable))
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            running = False
+            pygame.quit()
+   
+    #draw the grpahed line onto the plane depending on if draw is clicked
+    if drawbuttonclicked == True:
+        drawlines()
+    else:
+        pass
+    #flip the display
+    flip()
+    
+    #detect if the mouse is above buttons
+    #draw button
+    if draw_button_image_unclicked.get_rect(x=(spacing),  y=(buttonyvariable)).collidepoint(pygame.mouse.get_pos()):
+         drawbuttonclicker = True
+    else:
+        drawbuttonclicker = False
+     
+    #clear button
+    if clear_button_image_unclicked.get_rect(x=(spacing+spacing+buttonlength),  y=(buttonyvariable)).collidepoint(pygame.mouse.get_pos()):
+         clearbuttonclicker = True
+    else:
+        clearbuttonclicker = False
+        
+     
+    #exit button 
+    if exit_button_image_unclicked.get_rect(x=(spacing+spacing+spacing+buttonlength+buttonlength),  y=(buttonyvariable)).collidepoint(pygame.mouse.get_pos()):
+         exitbuttonclicker = True
+    else:
+        exitbuttonclicker = False
+     
+    #event dependent functions
+    for event in pygame.event.get():
+         if event.type == pygame.QUIT:
+            running = False
+            pygame.quit()

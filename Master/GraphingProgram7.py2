@@ -9,7 +9,8 @@ import math
 from pygame.locals import*
 import GUIkeyboardinput
 
-GUIkeyboardinput.test()
+GUIkeyboardinput.GUIInput()
+
 
 #we will be flipping the display often
 def flip():
@@ -117,6 +118,8 @@ screen.fill(background_colour)
 
 #bop it, twist it, flip it
 flip()
+
+print(input_show)
 
 raw = raw_input('y =')
 minusraw = "m" + raw

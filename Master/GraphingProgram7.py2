@@ -119,9 +119,11 @@ screen.fill(background_colour)
 #bop it, twist it, flip it
 flip()
 
-print(input_show)
 
-raw = raw_input('y =')
+maininput = ''.join(GUIkeyboardinput.input)
+
+
+raw = maininput
 minusraw = "m" + raw
 
 pointlist = [] #point list for the variables
@@ -199,19 +201,9 @@ while loops < 800: #repeat the rule thingamy
 #        minusyvalue = ybase
         
         
-    print('y:')
-    print(y)
-    print('x:')
-    print(x)
-    
-    print('xvalue:')
-    print(xvalue)
-    print('yvalue:')
-    print(yvalue)
-#    print('minusxvalue:')
-#    print(minusxvalue)
-#    print('minusyvalue:')
-#    print(minusyvalue)
+
+
+
     
     x = x+0.1
 #    mx = mx+0.1

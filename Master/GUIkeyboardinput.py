@@ -20,6 +20,8 @@ divide_button = pygame.image.load('divide.png')
 add_button = pygame.image.load('add.png')
 subtract_button = pygame.image.load('minus.png')
 done_button = pygame.image.load('done_button_unclicked.png')
+open_bracket = pygame.image.load('opened_bracket.png')
+close_bracket = pygame.image.load('closed_bracket.png')
 
 #set the font
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
@@ -37,7 +39,7 @@ def test():
 def GUIInput():
     
     #............setup the display window
-    (width, height) = (570,  257)
+    (width, height) = (432,  407)
     screen = pygame.display.set_mode((width, height))
     running = True
     
@@ -55,8 +57,10 @@ def GUIInput():
     screen.blit(add_button,  (10, 45))
     screen.blit(subtract_button,  (150, 45))
     screen.blit(divide_button,  (290, 45))
-    screen.blit(multiply_button,  (430, 45))
-    screen.blit(done_button,  (224, 200))
+    screen.blit(multiply_button,  (10, 195))
+    screen.blit(open_bracket, (150, 195))
+    screen.blit(close_bracket, (290, 195))
+    screen.blit(done_button,  (153, 350))
     #............setup done
     
     screen.blit(yequals,  (xvaly, yvaltext))
@@ -66,15 +70,15 @@ def GUIInput():
        
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                print (pygame.key.name(event.key))
+                
                 input.append(pygame.key.name(event.key))
                 input_show = ''.join(input)
                 keyin = myfont.render(input_show, False, (0, 0, 0))
                 screen.blit(keyin, (xvalin,yvaltext))
-                print(input_show)
+                
                 flip()
         
-        if done_button.get_rect(x=(224),  y=(200)).collidepoint(pygame.mouse.get_pos()):
+        if done_button.get_rect(x=(153),  y=(350)).collidepoint(pygame.mouse.get_pos()):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 running = False
 
@@ -105,9 +109,27 @@ def GUIInput():
                 screen.blit(keyin, (xvalin,yvaltext))
                 flip()
         
-        if multiply_button.get_rect(x=(430),  y=(45)).collidepoint(pygame.mouse.get_pos()):
+        if multiply_button.get_rect(x=(10),  y=(195)).collidepoint(pygame.mouse.get_pos()):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 input.append('*')
+                input_show = ''.join(input)
+                time.sleep(0.2)
+                keyin = myfont.render(input_show, False, (0, 0, 0))
+                screen.blit(keyin, (xvalin,yvaltext))
+                flip()
+         
+        if open_bracket.get_rect(x=(150),  y=(195)).collidepoint(pygame.mouse.get_pos()):
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                input.append('(')
+                input_show = ''.join(input)
+                time.sleep(0.2)
+                keyin = myfont.render(input_show, False, (0, 0, 0))
+                screen.blit(keyin, (xvalin,yvaltext))
+                flip()
+         
+        if close_bracket.get_rect(x=(290),  y=(195)).collidepoint(pygame.mouse.get_pos()):
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                input.append(')')
                 input_show = ''.join(input)
                 time.sleep(0.2)
                 keyin = myfont.render(input_show, False, (0, 0, 0))
